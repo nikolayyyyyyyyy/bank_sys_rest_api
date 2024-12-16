@@ -27,20 +27,9 @@ public class Client {
     private String email;
 
     @OneToMany(mappedBy = "client")
-    private Set<Transaction> transactions;
-
-    @OneToMany(mappedBy = "client")
     private Set<Account> accounts;
 
     public Client() {
-    }
-
-    public Set<Transaction> getTransactions() {
-        return transactions;
-    }
-
-    public void setTransactions(Set<Transaction> transactions) {
-        this.transactions = transactions;
     }
 
     public Set<Account> getAccounts() {

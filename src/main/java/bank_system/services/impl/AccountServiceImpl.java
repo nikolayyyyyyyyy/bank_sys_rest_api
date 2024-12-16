@@ -1,4 +1,5 @@
 package bank_system.services.impl;
+import bank_system.exceptions.EntityAlreadyExistException;
 import bank_system.exceptions.EntityNotFoundInDbException;
 import bank_system.models.entities.Account;
 import bank_system.repositories.AccountRepository;
@@ -17,23 +18,12 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void createAccount(Account account) {
-        this.accountRepository.save(account);
-    }
+        if(this.accountRepository.findByNumber(account.getNumber()) != null){
 
-    @Override
-    public void updateAccount(Account account) {
-        this.accountRepository.save(account);
-    }
-
-    @Override
-    public void deleteAccountById(long id) {
-        Account account = this.accountRepository.findById(id).orElse(null);
-        if(account == null){
-
-            throw new EntityNotFoundInDbException("Account not found!");
+            throw new EntityAlreadyExistException("Account with this number already exist!");
         }
 
-        this.accountRepository.delete(account);
+        this.accountRepository.save(account);
     }
 
     @Override
@@ -49,21 +39,11 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Set<Account> getAllAccounts() {
-        if(this.accountRepository.findAll().isEmpty()){
-
-            throw new EntityNotFoundInDbException("Account table is empty!");
-        }
+//        if(this.accountRepository.findAll().isEmpty()){
+//
+//            throw new EntityNotFoundInDbException("Account table is empty!");
+//        }
 
         return new HashSet<>(this.accountRepository.findAll());
-    }
-
-    @Override
-    public Account getAccountByNumber(String number) {
-        if(this.accountRepository.findByNumber(number) == null){
-
-            throw new EntityNotFoundInDbException("Account not found!");
-        }
-
-        return this.accountRepository.findByNumber(number);
     }
 }

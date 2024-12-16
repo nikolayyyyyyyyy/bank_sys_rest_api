@@ -22,38 +22,19 @@ import java.util.Set;
 @RestController
 @RequestMapping("transactions")
 public class TransactionController {
-    private final AccountService accountService;
-    private final ClientService clientService;
-    private final EmployeeService employeeService;
     private final TransactionService transactionService;
     private final ModelMapper modelMapper;
 
-    public TransactionController(AccountService accountService,
-                                 ClientService clientService,
-                                 EmployeeService employeeService,
-                                 TransactionService transactionService,
+    public TransactionController (TransactionService transactionService,
                                  ModelMapper modelMapper) {
-        this.accountService = accountService;
-        this.clientService = clientService;
-        this.employeeService = employeeService;
         this.transactionService = transactionService;
         this.modelMapper = modelMapper;
     }
 
     @PostMapping
     public String createTransaction(@RequestBody CreateTransactionDTO transactionDTO){
-        Client client = this.clientService.getClientById(transactionDTO.getClientId());
-        Employee employee = this.employeeService.getEmployeeById(transactionDTO.getEmployeeId());
-        Account account = this.accountService.getAccountById(transactionDTO.getAccountId());
 
-        Transaction transaction = new Transaction();
-        transaction.setAmount(transactionDTO.getAmount());
-        transaction.setTransactionType(transactionDTO.getTransactionType());
-        transaction.setClient(client);
-        transaction.setAccount(account);
-        transaction.setEmployee(employee);
-
-        this.transactionService.createTransaction(transaction);
+        this.transactionService.createTransaction(transactionDTO);
         return "Transaction created successfully!";
     }
 

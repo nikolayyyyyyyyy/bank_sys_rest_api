@@ -25,8 +25,11 @@ public class Account {
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @OneToMany(mappedBy = "account")
-    private Set<Transaction> transactions;
+    @OneToMany(mappedBy = "accountOfSender")
+    private Set<Transaction> outgoingTransactions;
+
+    @OneToMany(mappedBy = "accountOfReceiver")
+    private Set<Transaction> incomingTransactions;
 
     public Account() {
     }
@@ -69,13 +72,5 @@ public class Account {
 
     public void setBalance(double balance) {
         this.balance = balance;
-    }
-
-    public Set<Transaction> getTransactions() {
-        return transactions;
-    }
-
-    public void setTransactions(Set<Transaction> transactions) {
-        this.transactions = transactions;
     }
 }

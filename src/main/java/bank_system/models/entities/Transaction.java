@@ -14,16 +14,16 @@ public class Transaction {
     private TransactionType transactionType;
 
     @ManyToOne
-    @JoinColumn(name = "client_id")
-    private Client client;
+    @JoinColumn(name = "account_of_sender_id")
+    private Account accountOfSender;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
     @ManyToOne
-    @JoinColumn(name = "account_id")
-    private Account account;
+    @JoinColumn(name = "account_of_receiver_id")
+    private Account accountOfReceiver;
 
     @Column(nullable = false)
     private double amount;
@@ -47,12 +47,12 @@ public class Transaction {
         this.transactionType = transactionType;
     }
 
-    public Client getClient() {
-        return client;
+    public Account getAccountOfSender() {
+        return accountOfSender;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setAccountOfSender(Account accountOfSender) {
+        this.accountOfSender = accountOfSender;
     }
 
     public Employee getEmployee() {
@@ -63,19 +63,19 @@ public class Transaction {
         this.employee = employee;
     }
 
+    public Account getAccountOfReceiver() {
+        return accountOfReceiver;
+    }
+
+    public void setAccountOfReceiver(Account accountOfReceiver) {
+        this.accountOfReceiver = accountOfReceiver;
+    }
+
     public double getAmount() {
         return amount;
     }
 
     public void setAmount(double amount) {
         this.amount = amount;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
     }
 }

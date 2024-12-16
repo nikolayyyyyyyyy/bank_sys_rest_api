@@ -17,4 +17,24 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(ex,HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(value = {NotEnoughAmountException.class})
+    public ResponseEntity<Object> handleNotEnoughAmountException(NotEnoughAmountException e){
+        InsufficientAmountException ex =
+                new InsufficientAmountException(e.getMessage(),
+                        e.getCause(),
+                        HttpStatus.NOT_FOUND);
+
+        return new ResponseEntity<>(ex,HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = {EntityAlreadyExistException.class})
+    public ResponseEntity<Object> handleNotEnoughAmountException(EntityAlreadyExistException e){
+        DuplicatedEntityException ex =
+                new DuplicatedEntityException(e.getMessage(),
+                        e.getCause(),
+                        HttpStatus.NOT_FOUND);
+
+        return new ResponseEntity<>(ex,HttpStatus.NOT_FOUND);
+    }
 }

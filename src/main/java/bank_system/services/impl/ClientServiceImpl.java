@@ -1,5 +1,6 @@
 package bank_system.services.impl;
 
+import bank_system.exceptions.EntityAlreadyExistException;
 import bank_system.exceptions.EntityNotFoundInDbException;
 import bank_system.models.entities.Client;
 import bank_system.repositories.ClientRepository;
@@ -19,23 +20,12 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public void createClient(Client client) {
-        this.clientRepository.save(client);
-    }
+        if(this.clientRepository.findByEgn(client.getEgn()) != null){
 
-    @Override
-    public void updateClient(Client client) {
-        this.clientRepository.save(client);
-    }
-
-    @Override
-    public void deleteClientById(long id) {
-        Client client = this.clientRepository.findById(id).orElse(null);
-        if(client == null){
-
-            throw new EntityNotFoundInDbException("Client not found!");
+            throw new EntityAlreadyExistException("Client with this egn already exist!");
         }
 
-        this.clientRepository.delete(client);
+        this.clientRepository.save(client);
     }
 
     @Override
@@ -51,21 +41,11 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Set<Client> getAllClients() {
-        if(this.clientRepository.findAll().isEmpty()){
-
-            throw new EntityNotFoundInDbException("Client table is empty");
-        }
+//        if(this.clientRepository.findAll().isEmpty()){
+//
+//            throw new EntityNotFoundInDbException("Client table is empty");
+//        }
 
         return new HashSet<>(this.clientRepository.findAll());
-    }
-
-    @Override
-    public Client getClientByEgn(String egn) {
-        if(this.clientRepository.findByEgn(egn) == null){
-
-            throw new EntityNotFoundInDbException("Client not found!");
-        }
-
-        return this.clientRepository.findByEgn(egn);
     }
 }

@@ -91,7 +91,6 @@ public class SeedComponent implements CommandLineRunner {
             firstAccount.setCurrency(Currency.EUR);
             firstAccount.setClient(first);
             this.accountService.createAccount(firstAccount);
-            this.clientService.createClient(first);
 
             Account secondAccount = new Account();
             secondAccount.setNumber("BG234A32452245KF2DC");
@@ -99,7 +98,6 @@ public class SeedComponent implements CommandLineRunner {
             secondAccount.setCurrency(Currency.GBR);
             secondAccount.setClient(second);
             this.accountService.createAccount(secondAccount);
-            this.clientService.createClient(second);
 
 
             Account thirdAccount = new Account();
@@ -108,7 +106,6 @@ public class SeedComponent implements CommandLineRunner {
             thirdAccount.setCurrency(Currency.BGN);
             thirdAccount.setClient(third);
             this.accountService.createAccount(thirdAccount);
-            this.clientService.createClient(third);
 
 
             Account fourthAccount = new Account();
@@ -117,7 +114,6 @@ public class SeedComponent implements CommandLineRunner {
             fourthAccount.setCurrency(Currency.EUR);
             fourthAccount.setClient(fourth);
             this.accountService.createAccount(fourthAccount);
-            this.clientService.createClient(fourth);
 
 
             Account fifthAccount = new Account();
@@ -126,7 +122,6 @@ public class SeedComponent implements CommandLineRunner {
             fifthAccount.setCurrency(Currency.EUR);
             fifthAccount.setClient(fifth);
             this.accountService.createAccount(fifthAccount);
-            this.clientService.createClient(fifth);
         }
     }
 

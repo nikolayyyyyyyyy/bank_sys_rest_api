@@ -5,11 +5,11 @@ public class CreateTransactionDTO {
 
     private TransactionType transactionType;
 
-    private int clientId;
+    private int senderAccountId;
 
     private int employeeId;
 
-    private int accountId;
+    private int receiverAccountId;
 
     private double amount;
 
@@ -24,12 +24,12 @@ public class CreateTransactionDTO {
         this.transactionType = transactionType;
     }
 
-    public int getClientId() {
-        return clientId;
+    public int getSenderAccountId() {
+        return senderAccountId;
     }
 
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
+    public void setSenderAccountId(int senderAccountId) {
+        this.senderAccountId = senderAccountId;
     }
 
     public int getEmployeeId() {
@@ -40,12 +40,12 @@ public class CreateTransactionDTO {
         this.employeeId = employeeId;
     }
 
-    public int getAccountId() {
-        return accountId;
+    public int getReceiverAccountId() {
+        return receiverAccountId;
     }
 
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
+    public void setReceiverAccountId(int receiverAccountId) {
+        this.receiverAccountId = receiverAccountId;
     }
 
     public double getAmount() {
