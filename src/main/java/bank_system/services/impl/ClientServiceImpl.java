@@ -41,10 +41,10 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Set<Client> getAllClients() {
-//        if(this.clientRepository.findAll().isEmpty()){
-//
-//            throw new EntityNotFoundInDbException("Client table is empty");
-//        }
+        if(this.clientRepository.findAll().isEmpty()){
+
+            throw new EntityNotFoundInDbException("Client table is empty");
+        }
 
         return new HashSet<>(this.clientRepository.findAll());
     }

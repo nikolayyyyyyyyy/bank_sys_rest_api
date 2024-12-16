@@ -39,10 +39,10 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Set<Account> getAllAccounts() {
-//        if(this.accountRepository.findAll().isEmpty()){
-//
-//            throw new EntityNotFoundInDbException("Account table is empty!");
-//        }
+        if(this.accountRepository.findAll().isEmpty()){
+
+            throw new EntityNotFoundInDbException("Account table is empty!");
+        }
 
         return new HashSet<>(this.accountRepository.findAll());
     }

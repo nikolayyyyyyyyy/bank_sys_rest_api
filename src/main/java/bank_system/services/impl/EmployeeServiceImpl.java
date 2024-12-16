@@ -41,10 +41,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Set<Employee> getAllEmployees() {
-//        if(this.employeeRepository.findAll().isEmpty()){
-//
-//            throw new EntityNotFoundInDbException("Employee table is empty!");
-//        }
+        if(this.employeeRepository.findAll().isEmpty()){
+
+            throw new EntityNotFoundInDbException("Employee table is empty!");
+        }
 
         return new HashSet<>(this.employeeRepository.findAll());
     }

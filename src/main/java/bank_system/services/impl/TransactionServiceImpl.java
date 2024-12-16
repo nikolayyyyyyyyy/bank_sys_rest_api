@@ -3,7 +3,6 @@ import bank_system.exceptions.EntityNotFoundInDbException;
 import bank_system.exceptions.NotEnoughAmountException;
 import bank_system.models.dtos.CreateTransactionDTO;
 import bank_system.models.entities.Account;
-import bank_system.models.entities.Client;
 import bank_system.models.entities.Employee;
 import bank_system.models.entities.Transaction;
 import bank_system.repositories.TransactionRepository;
@@ -18,13 +17,13 @@ import java.util.Set;
 @Service
 public class TransactionServiceImpl implements TransactionService {
     private final AccountService accountService;
-    private final ClientService clientService;
     private final EmployeeService employeeService;
     private final TransactionRepository transactionRepository;
 
-    public TransactionServiceImpl(AccountService accountService, ClientService clientService, EmployeeService employeeService, TransactionRepository transactionRepository) {
+    public TransactionServiceImpl(AccountService accountService,
+                                  EmployeeService employeeService,
+                                  TransactionRepository transactionRepository) {
         this.accountService = accountService;
-        this.clientService = clientService;
         this.employeeService = employeeService;
         this.transactionRepository = transactionRepository;
     }
