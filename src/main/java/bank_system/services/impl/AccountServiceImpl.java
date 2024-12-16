@@ -1,4 +1,5 @@
 package bank_system.services.impl;
+import bank_system.exceptions.EntityNotFoundInDbException;
 import bank_system.models.entities.Account;
 import bank_system.repositories.AccountRepository;
 import bank_system.services.AccountService;
@@ -26,21 +27,43 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void deleteAccountById(long id) {
-        this.accountRepository.deleteById(id);
+        Account account = this.accountRepository.findById(id).orElse(null);
+        if(account == null){
+
+            throw new EntityNotFoundInDbException("Account not found!");
+        }
+
+        this.accountRepository.delete(account);
     }
 
     @Override
     public Account getAccountById(long id) {
-        return this.accountRepository.findById(id).orElse(null);
+        Account account = this.accountRepository.findById(id).orElse(null);
+        if(account == null){
+
+            throw new EntityNotFoundInDbException("Account not found!");
+        }
+
+        return account;
     }
 
     @Override
     public Set<Account> getAllAccounts() {
+        if(this.accountRepository.findAll().isEmpty()){
+
+            throw new EntityNotFoundInDbException("Account table is empty!");
+        }
+
         return new HashSet<>(this.accountRepository.findAll());
     }
 
     @Override
     public Account getAccountByNumber(String number) {
+        if(this.accountRepository.findByNumber(number) == null){
+
+            throw new EntityNotFoundInDbException("Account not found!");
+        }
+
         return this.accountRepository.findByNumber(number);
     }
 }

@@ -1,5 +1,6 @@
 package bank_system.services.impl;
 
+import bank_system.exceptions.EntityNotFoundInDbException;
 import bank_system.models.entities.Employee;
 import bank_system.repositories.EmployeeRepository;
 import bank_system.services.EmployeeService;
@@ -28,21 +29,43 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void deleteEmployeeById(long id) {
-        this.employeeRepository.deleteById(id);
+        Employee employee = this.employeeRepository.findById(id).orElse(null);
+        if(employee == null){
+
+            throw new EntityNotFoundInDbException("Employee not found!");
+        }
+
+        this.employeeRepository.delete(employee);
     }
 
     @Override
     public Employee getEmployeeById(long id) {
-        return this.employeeRepository.findById(id).orElse(null);
+        Employee employee = this.employeeRepository.findById(id).orElse(null);
+        if(employee == null){
+
+            throw new EntityNotFoundInDbException("Employee not found!");
+        }
+
+        return employee;
     }
 
     @Override
     public Set<Employee> getAllEmployees() {
+        if(this.employeeRepository.findAll().isEmpty()){
+
+            throw new EntityNotFoundInDbException("Employee table is empty!");
+        }
+
         return new HashSet<>(this.employeeRepository.findAll());
     }
 
     @Override
     public Employee getEmployeeByTelephoneNumber(String telephoneNumber) {
+        if(this.employeeRepository.findByTelephoneNumber(telephoneNumber) == null){
+
+            throw new EntityNotFoundInDbException("Employee not found!");
+        }
+
         return this.employeeRepository.findByTelephoneNumber(telephoneNumber);
     }
 }

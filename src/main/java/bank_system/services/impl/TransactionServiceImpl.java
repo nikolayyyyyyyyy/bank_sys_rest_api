@@ -1,4 +1,5 @@
 package bank_system.services.impl;
+import bank_system.exceptions.EntityNotFoundInDbException;
 import bank_system.models.entities.Transaction;
 import bank_system.repositories.TransactionRepository;
 import bank_system.services.TransactionService;
@@ -26,16 +27,33 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public void deleteTransactionById(long id) {
-        this.transactionRepository.deleteById(id);
+        Transaction transaction = this.transactionRepository.findById(id).orElse(null);
+        if(transaction == null){
+
+            throw new EntityNotFoundInDbException("Transaction not found!");
+        }
+
+        this.transactionRepository.delete(transaction);
     }
 
     @Override
     public Transaction getTransactionById(long id) {
-        return this.transactionRepository.findById(id).orElse(null);
+        Transaction transaction = this.transactionRepository.findById(id).orElse(null);
+        if(transaction == null){
+
+            throw new EntityNotFoundInDbException("Transaction not found!");
+        }
+
+        return transaction;
     }
 
     @Override
     public Set<Transaction> getAllTransactions() {
+        if(this.transactionRepository.findAll().isEmpty()){
+
+            throw new EntityNotFoundInDbException("Transaction table is empty!");
+        }
+
         return new HashSet<>(this.transactionRepository.findAll());
     }
 }
