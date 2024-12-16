@@ -58,7 +58,7 @@ public class SeedComponent implements CommandLineRunner {
             fourth.setFirstName("Atanas");
             fourth.setMiddleName("Atanasov");
             fourth.setLastName("Genchev");
-            fourth.setEgn("9122388740");
+            fourth.setEgn("9162388740");
             fourth.setEmail("topNasito@gmail.com");
 
             Client fifth = new Client();
@@ -86,44 +86,46 @@ public class SeedComponent implements CommandLineRunner {
             Client fifth = this.clientService.getClientById(5);
 
             Account firstAccount = new Account();
-            firstAccount.setNumber("BGOWSA32452245KFFDC");
+            firstAccount.setNumber("BGO2WSA32452245KF2FDC");
             firstAccount.setBalance(100000);
             firstAccount.setCurrency(Currency.EUR);
             firstAccount.setClient(first);
             this.accountService.createAccount(firstAccount);
+            this.clientService.createClient(first);
 
             Account secondAccount = new Account();
-            firstAccount.setNumber("BG234A32452245KF2DC");
-            firstAccount.setBalance(1240);
-            firstAccount.setCurrency(Currency.GBR);
-            firstAccount.setClient(second);
+            secondAccount.setNumber("BG234A32452245KF2DC");
+            secondAccount.setBalance(1240);
+            secondAccount.setCurrency(Currency.GBR);
+            secondAccount.setClient(second);
             this.accountService.createAccount(secondAccount);
+            this.clientService.createClient(second);
+
 
             Account thirdAccount = new Account();
-            firstAccount.setNumber("BGO77SA32452245KF4DC");
-            firstAccount.setBalance(100400);
-            firstAccount.setCurrency(Currency.BGN);
-            firstAccount.setClient(third);
+            thirdAccount.setNumber("BGO77SA32452245KF4DC");
+            thirdAccount.setBalance(100400);
+            thirdAccount.setCurrency(Currency.BGN);
+            thirdAccount.setClient(third);
             this.accountService.createAccount(thirdAccount);
+            this.clientService.createClient(third);
+
 
             Account fourthAccount = new Account();
-            firstAccount.setNumber("BG11OW3SA32452245KFF4DC");
-            firstAccount.setBalance(120000);
-            firstAccount.setCurrency(Currency.EUR);
-            firstAccount.setClient(fourth);
+            fourthAccount.setNumber("BG11OW3SA32452245KFF4DC");
+            fourthAccount.setBalance(120000);
+            fourthAccount.setCurrency(Currency.EUR);
+            fourthAccount.setClient(fourth);
             this.accountService.createAccount(fourthAccount);
+            this.clientService.createClient(fourth);
+
 
             Account fifthAccount = new Account();
-            firstAccount.setNumber("BGO2WSA32452245KF4FDC");
-            firstAccount.setBalance(100000);
-            firstAccount.setCurrency(Currency.EUR);
-            firstAccount.setClient(fifth);
+            fifthAccount.setNumber("BGO2WSA32452245KF4FDC");
+            fifthAccount.setBalance(100000);
+            fifthAccount.setCurrency(Currency.EUR);
+            fifthAccount.setClient(fifth);
             this.accountService.createAccount(fifthAccount);
-
-            this.clientService.createClient(first);
-            this.clientService.createClient(second);
-            this.clientService.createClient(third);
-            this.clientService.createClient(fourth);
             this.clientService.createClient(fifth);
         }
     }
